@@ -1,0 +1,50 @@
+@keyframes hand-wave {
+    0% { transform: rotate(0); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(0); }
+    75% { transform: rotate(-3deg); }
+    100% { transform: rotate(0); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(3px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+  }
+
+  .l-container {
+    margin: 60px auto;
+    max-width: 720px;
+  }
+
+  .l-emoji {
+    display: inline-block;
+    font-size: 64px;
+
+    &.hand-wave {
+      animation: hand-wave 1.2s infinite linear;
+    }
+
+    &.clover {
+      animation: float 2s infinite linear;
+    }
+  }
+
+  .l-title {
+    margin: 40px 0;
+  }
+
+  .l-block {
+    margin: 40px 0 0;
+
+    &.-text-right {
+      text-align: right;
+    }
+  }
+
+  .l-subtitle {
+    margin: 0 0 20px;
+    font-weight: $font-weight-regular;
+  }
