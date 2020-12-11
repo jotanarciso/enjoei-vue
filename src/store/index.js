@@ -33,6 +33,9 @@ export default new Vuex.Store({
     setProducts: (state, { products }) => {
       state.products = products;
     },
+    setTotalProducts: (state, total) => {
+      state.totalProducts = total;
+    },
     setSearchTerm: (state, newTerm) => {
       state.searchTerm = newTerm;
     },
@@ -86,26 +89,34 @@ export default new Vuex.Store({
         })
         .then(
           response => {
+            // console.log(response); debug
             commit("setProducts", {
-              products: response.data.data.search.products.edges,
-              totalProducts: response.data.data.search.products.total
+              products: response.data.data.search.products.edges
             });
-            // console.log(response);
+            commit(
+              "setTotalProducts",
+              response.data.data.search.products.total
+            );
+
             return true;
           },
           err => {
-            console.log(err);
+            // console.log(err);
             return false;
           }
         );
     },
     getProductsByTerm: function({ dispatch, commit, state }, term) {
-      // console.log(term) debug
+      // console.log(term); debug
       commit("setSearchTerm", term);
       dispatch("getProducts");
     },
+    cleanSearch: function({ dispatch, commit, state }) {
+      commit("setSearchTerm", "");
+      dispatch("getProducts");
+    },
     setNextPage: function({ dispatch, commit, state }, page) {
-      // console.log(page) debug
+      // console.log(page); debug
       commit("setPage", page);
       dispatch("getProducts");
     }

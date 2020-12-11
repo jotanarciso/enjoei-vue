@@ -1,9 +1,14 @@
-@import './variables';
-@import './global.scss';
+@import "./variables";
+@import "./global.scss";
+@import "./shimmer.scss";
 
 // Pages
-@import './pages/instructions';
+@import "./pages/instructions";
+@import "./pages/search";
 
 // Components
-@import './components/container';
-@import './components/header';
+@import "./components/container";
+@import "./components/header";
+@import "./components/product-card";
+@import "./components/search-bar";
+@import "./components/empty-result";

@@ -1,8 +1,6 @@
 <template>
   <div id="default">
-    <vContainer :gutter="false">
-      <vHeader> <img src="../assets/images/icons/enjoei-logo.svg" /></vHeader>
-    </vContainer>
+    <vHeader> <img src="../assets/images/icons/enjoei-logo.svg" alt="logo do enjoei" /></vHeader>
     <vContainer :gutter="true">
       <slot />
     </vContainer>

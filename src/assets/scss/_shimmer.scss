@@ -1,0 +1,11 @@
+@keyframes pulse-bg {
+  0% {
+    background-color: $color-gray-1;
+  }
+  50% {
+    background-color: $color-gray-2;
+  }
+  100% {
+    background-color: $color-gray-1;
+  }
+}
