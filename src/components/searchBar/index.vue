@@ -1,6 +1,10 @@
 <template>
   <div class="search-bar">
-    <div class="message">{{ resultMessage }}</div>
+    <div class="message">
+      <span v-show="searchActive">
+        {{ resultMessage }}
+      </span>
+    </div>
     <div class="search">
       <span class="clean-filter" @click="cleanFilter">Limpar filtro</span>
       <div class="bar">
@@ -26,6 +30,7 @@ export default {
   data() {
     return {
       searchTerm: "",
+      searchActive: false,
     };
   },
 
@@ -46,10 +51,12 @@ export default {
   },
   methods: {
     cleanFilter() {
+      this.searchActive = false;
       this.searchTerm = "";
       this.$router.replace({ query: null }).catch((err) => {});
     },
     findByTerm() {
+      this.searchActive = true;
       this.$router.push({
         query: (this.searchTerm.length > 0 || !this.searchTerm.trim()) && {
           term: this.searchTerm,
