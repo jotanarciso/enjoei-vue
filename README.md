@@ -1,3 +1,5 @@
+Soon I will add the tests and pagination.
+
 ### Project setup
 ```
 yarn install
