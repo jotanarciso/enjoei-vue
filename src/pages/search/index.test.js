@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import vSearch from '@/pages/search.vue'
+import vSearch from '@/pages/search'
 import axios from 'axios'
 
 jest.mock('axios')

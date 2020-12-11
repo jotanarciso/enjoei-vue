@@ -1,21 +1,17 @@
 <template>
   <div id="app">
-    <vContainer :gutter="false">
-      Enjoei
-    </vContainer>
-
-    <vContainer :gutter="true">
+    <LayoutDefault>
       <RouterView />
-    </vContainer>
+    </LayoutDefault>
   </div>
 </template>
 
 <script>
-  import vContainer from '@/components/container'
+import LayoutDefault from "@/layouts/default";
 
-  export default {
-    components: {
-      vContainer
-    }
-  }
+export default {
+  components: {
+    LayoutDefault,
+  },
+};
 </script>
