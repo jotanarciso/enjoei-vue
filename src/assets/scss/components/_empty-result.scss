@@ -27,3 +27,9 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: $screen-sm-min) {
+  .empty-result {
+   text-align: justify;;
+  }
+}
