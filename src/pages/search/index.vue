@@ -3,7 +3,6 @@
     <search-bar />
     <div
       class="c-results"
-      stagger="800"
       v-if="products.length > 0"
       v-show="loadingFinish"
     >

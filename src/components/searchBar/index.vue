@@ -6,7 +6,7 @@
       </span>
     </div>
     <div class="search">
-      <span class="clean-filter" @click="cleanFilter">Limpar filtro</span>
+      <span class="clean-filter" @click="cleanFilter">limpar busca</span>
       <div class="bar">
         <input
           v-model="searchTerm"

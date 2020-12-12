@@ -11,7 +11,6 @@
 
     .bar {
       position: relative;
-      order: 1;
 
       input {
         margin: 0;
@@ -42,27 +41,35 @@
       color: $color-pink;
       margin: 0.625rem;
       cursor: pointer;
-      order: 2;
     }
   }
 
   .message {
     font-weight: $font-weight-bold;
   }
+}
 
-  @media (max-width: $screen-md-min) {
-    .message {
-      display: none;
-    }
-    .search {
-      margin: 0 auto;
-    }
+@media (max-width: $screen-md-min) {
+  .message {
+    display: none;
+  }
+  .search {
+    margin: 0 auto;
+  }
 
-    .bar {
-      order: 2;
-    }
-    .clean-filter {
-      order: 1;
-    }
+  .bar {
+    order: 1;
+  }
+  .clean-filter {
+    order: 2;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .bar {
+    order: 2;
+  }
+  .clean-filter {
+    order: 1;
   }
 }
