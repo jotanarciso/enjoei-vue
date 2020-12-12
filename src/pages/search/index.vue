@@ -29,6 +29,9 @@ import productCardSkeleton from "@/shimmer/productCardSkeleton";
 import searchBar from "@/components/searchBar";
 import emptyResult from "@/components/emptyResult";
 export default {
+  pageTitle() {
+    return "Pesquisa";
+  },
   data() {
     return {
       loadingFinish: false,
