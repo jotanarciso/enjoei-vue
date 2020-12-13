@@ -8,8 +8,10 @@ export default new Vuex.Store({
   state: {
     products: [],
     totalProducts: 0,
+    first: 10,
     searchTerm: "",
-    page: 10
+    page: 0,
+    isLoading: true
   },
   getters: {
     products: state => {
@@ -26,6 +28,10 @@ export default new Vuex.Store({
 
     page: state => {
       return state.page;
+    },
+
+    isLoading: state => {
+      return state.isLoading;
     }
   },
 
@@ -39,8 +45,13 @@ export default new Vuex.Store({
     setSearchTerm: (state, newTerm) => {
       state.searchTerm = newTerm;
     },
-    setPage: (state, { newPage }) => {
+
+    setPage: (state, newPage) => {
       state.page = newPage;
+    },
+
+    setLoading: (state, bool) => {
+      state.isLoading = bool;
     }
   },
   actions: {
@@ -75,7 +86,8 @@ export default new Vuex.Store({
                     price {
                       original
                       current
-                    }
+                    },
+                    
                   }
                 }
               }
@@ -84,12 +96,11 @@ export default new Vuex.Store({
         `,
           variables: {
             term: state.searchTerm,
-            first: state.page
+            first: state.first
           }
         })
         .then(
           response => {
-            // console.log(response); debug
             commit("setProducts", {
               products: response.data.data.search.products.edges
             });
@@ -106,19 +117,20 @@ export default new Vuex.Store({
           }
         );
     },
-    getProductsByTerm: function({ dispatch, commit, state }, term) {
+    getProductsByTerm: function({ commit, dispatch }, term) {
       // console.log(term); debug
       commit("setSearchTerm", term);
       dispatch("getProducts");
     },
-    cleanSearch: function({ dispatch, commit, state }) {
+    cleanSearch: function({ commit, dispatch }) {
       commit("setSearchTerm", "");
       dispatch("getProducts");
     },
-    setNextPage: function({ dispatch, commit, state }, page) {
-      // console.log(page); debug
-      commit("setPage", page);
-      dispatch("getProducts");
+    getLoading: function({ commit, dispatch, state }) {
+      commit("setLoading", true);
+      setTimeout(() => {
+        commit("setLoading", false);
+      }, 2000);
     }
   },
   modules: {}

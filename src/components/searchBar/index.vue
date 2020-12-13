@@ -1,7 +1,7 @@
 <template>
   <div class="search-bar">
     <div class="message">
-      <span v-show="searchActive">
+      <span>
         {{ resultMessage }}
       </span>
     </div>
@@ -13,12 +13,8 @@
           v-on:keyup.enter="findByTerm"
           placeholder="buscar"
         />
-        <button @click="findByTerm">
-          <img
-            src="../../assets/images/icons/search-icon.svg"
-            alt="lupa de
-        pesquisa"
-          />
+        <button class="clean" @click="findByTerm">
+          <searchIcon />
         </button>
       </div>
     </div>
@@ -26,20 +22,32 @@
 </template>
 
 <script>
+import searchIcon from "@/assets/images/icons/search-icon.svg";
 export default {
+  components: {
+    searchIcon,
+  },
   data() {
     return {
       searchTerm: "",
-      searchActive: false,
     };
   },
 
   computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+
+    totalProducts() {
+      return this.$store.state.totalProducts;
+    },
+
     resultMessage() {
-      const { totalProducts } = this.$store.state;
-      if (totalProducts > 0) {
-        return `${totalProducts} produtos encontrados`;
-      } else return "nenhum produto encontrado";
+      if (!this.isLoading) {
+        if (this.totalProducts > 0) {
+          return `${this.totalProducts} produtos encontrados`;
+        } else return "nenhum produto encontrado";
+      }
     },
   },
   watch: {
@@ -51,17 +59,15 @@ export default {
   },
   methods: {
     cleanFilter() {
-      this.searchActive = false;
       this.searchTerm = "";
       this.$router.replace({ query: null }).catch((err) => {});
     },
     findByTerm() {
-      this.searchActive = true;
-      this.$router.push({
-        query: (this.searchTerm.length > 0 || !this.searchTerm.trim()) && {
-          term: this.searchTerm,
-        },
-      });
+      if (this.searchTerm.length > 0 || !this.searchTerm.trim()) {
+        this.$router.push({
+          query: { term: this.searchTerm },
+        });
+      }
     },
   },
 };

@@ -2,9 +2,9 @@
   <div class="empty-result">
     <h2>ué, não encontramos nadinha</h2>
     <p>que tal recomeçar do começo?</p>
-    <button @click="cleanFilter">limpar busca</button>
+    <button class="clean" @click="cleanFilter">limpar busca</button>
     <p>
-      <img src="../../assets/images/components/blank-slate.png" />
+      <img src="@/assets/images/components/blank-slate.png" />
     </p>
   </div>
 </template>

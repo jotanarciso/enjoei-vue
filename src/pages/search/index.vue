@@ -1,21 +1,20 @@
 <template>
   <div>
     <search-bar />
-    <div
-      class="c-results"
-      v-if="products.length > 0"
-      v-show="loadingFinish"
-    >
-      <product-card
-        v-for="product in products"
-        :key="product.id"
-        :product="product"
-      />
+    <div v-if="products.length > 0" v-show="!isLoading">
+      <div class="c-results">
+        <product-card
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+        />
+      </div>
+      <pagination />
     </div>
-    <div class="c-results" v-else-if="notFound">
+    <div class="c-results" v-else-if="notFound && !isLoading">
       <empty-result />
     </div>
-    <div class="c-results" v-if="!loadingFinish">
+    <div class="c-results" v-if="isLoading">
       <product-card-skeleton v-for="index in 10" :key="index" />
     </div>
   </div>
@@ -26,25 +25,24 @@ import { mapActions } from "vuex";
 import productCard from "@/components/productCard";
 import productCardSkeleton from "@/shimmer/productCardSkeleton";
 import searchBar from "@/components/searchBar";
+import pagination from "@/components/pagination";
 import emptyResult from "@/components/emptyResult";
+
 export default {
   pageTitle() {
     return "Pesquisa";
   },
-  data() {
-    return {
-      loadingFinish: false,
-    };
-  },
+
   components: {
     "product-card": productCard,
     "product-card-skeleton": productCardSkeleton,
     "search-bar": searchBar,
+    pagination: pagination,
     "empty-result": emptyResult,
   },
   computed: {
     products() {
-      this.setDelay();
+      this.getLoading();
       return this.$store.state.products;
     },
     notFound() {
@@ -52,23 +50,22 @@ export default {
         return true;
       }
     },
+    currentPage() {
+      return this.$store.state.page;
+    },
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
   },
   methods: {
     ...mapActions([
       "getProducts",
       "getProductsByTerm",
-      "setNextPage",
       "cleanSearch",
+      "getLoading",
     ]),
     getSearch(term) {
       this.getProductsByTerm(term);
-    },
-
-    setDelay() {
-      this.loadingFinish = false;
-      setTimeout(() => {
-        this.loadingFinish = true;
-      }, 2000);
     },
   },
   watch: {
@@ -80,7 +77,7 @@ export default {
       }
     },
   },
-  mounted() {
+  created() {
     this.getProducts();
   },
 };

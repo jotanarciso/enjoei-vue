@@ -22,6 +22,15 @@ textarea {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  cursor: pointer;
+  &.clean {
+    border: none;
+    outline: none;
+    background: none;
+  }
+}
+
 a {
   color: $color-highlight;
   text-decoration: none;

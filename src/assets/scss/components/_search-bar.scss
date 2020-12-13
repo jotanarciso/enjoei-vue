@@ -17,7 +17,7 @@
         padding-left: 15px;
         height: 2.625rem;
         width: 15rem;
-        border: solid 1px #cac7c5;
+        border: solid 1px $color-gray-2;
         border-radius: $border-radius-2;
         font-weight: $font-weight-bold;
       }
@@ -27,14 +27,14 @@
         bottom: 5px;
         right: 0.625rem;
         width: 2rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        outline: none;
 
         &:focus {
           border: none;
         }
+      }
+
+      svg {
+        width: 1rem;
       }
     }
     .clean-filter {

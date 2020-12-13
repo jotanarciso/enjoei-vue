@@ -1,6 +1,8 @@
 <template>
   <div id="default">
-    <vHeader> <img src="../assets/images/icons/enjoei-logo.svg" alt="logo do enjoei" /></vHeader>
+    <vHeader>
+      <vLogo />
+    </vHeader>
     <vContainer :gutter="true">
       <slot />
     </vContainer>
@@ -10,11 +12,13 @@
 <script>
 import vContainer from "@/components/container";
 import vHeader from "@/components/header";
+import vLogo from "@/assets/images/icons/enjoei-logo.svg";
 
 export default {
   components: {
     vContainer,
     vHeader,
+    vLogo,
   },
 };
 </script>
